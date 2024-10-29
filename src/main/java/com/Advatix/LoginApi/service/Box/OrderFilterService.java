@@ -10,6 +10,7 @@ import com.Advatix.LoginApi.dto.PickerUserDto;
 import com.Advatix.LoginApi.entity.Order.OmsOrderInfo;
 import com.Advatix.LoginApi.entity.Order.OmsOrderItems;
 import com.Advatix.LoginApi.entity.Warehouse.AssignedPicker;
+import com.Advatix.LoginApi.entity.Warehouse.enums.MasterStatus;
 import com.Advatix.LoginApi.entity.Warehouse.enums.PickerStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -62,11 +63,7 @@ public class OrderFilterService {
     }
 
 
-
-
-
-
-//    //////////////////////////////////////////////
+//
 public ResponseEntity<?> assignPicker(AssignedPickerDto assignedPickerDto){
     if (assignedPickerDto.getOrderId() == null || assignedPickerDto.getPickerName() == null) {
         return new ResponseEntity<>("Order ID and Picker Name must not be null", HttpStatus.BAD_REQUEST);
@@ -89,7 +86,7 @@ public ResponseEntity<?> assignPicker(AssignedPickerDto assignedPickerDto){
     assignedPickerRepo.save(assignedPicker);
 
     OmsOrderInfo fepOrdersInfo = optionalFepOrdersInfo.get();
-    fepOrdersInfo.setStatus(PickerStatus.ASSIGNED.ordinal());
+    fepOrdersInfo.setStatus(MasterStatus.Assigned);
     cilOrderInfoRepo.save(fepOrdersInfo);
 
     return new ResponseEntity<>("Picker Assigned Successfully",HttpStatus.CREATED);
@@ -141,7 +138,7 @@ public ResponseEntity<?> assignPicker(AssignedPickerDto assignedPickerDto){
 
 
             OmsOrderInfo fepOrdersInfo = optionalFepOrdersInfo.get();
-            fepOrdersInfo.setStatus(PickerStatus.PACKED.ordinal());
+            fepOrdersInfo.setStatus(MasterStatus.Packed);
             cilOrderInfoRepo.save(fepOrdersInfo);
 
             assignedPickerRepo.save(assignedPicker);

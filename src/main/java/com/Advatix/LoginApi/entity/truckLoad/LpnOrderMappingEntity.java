@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class LpnOrderMappingEntity {
     @Id
-    private String id;
+    private Integer id;
+    private Long orderId;
     private String lpn;
-    private String order;
+    private String orderName;
 }

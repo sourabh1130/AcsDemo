@@ -1,5 +1,6 @@
 package com.Advatix.LoginApi.entity.truckLoad;
 
+import com.Advatix.LoginApi.entity.Warehouse.enums.MasterStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -17,5 +18,5 @@ public class LpnEntity {
     private String warehouse;
     private String shipFrom;
     private String shipTo;
-    private Long status;
+    private MasterStatus status;
 }

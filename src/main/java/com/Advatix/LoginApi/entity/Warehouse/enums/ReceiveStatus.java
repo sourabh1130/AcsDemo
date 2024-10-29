@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 public enum ReceiveStatus {
-    RECEIVED(1, "Received"), STOW(2, "Stow"), RELABEL(3, "Relabel"),
-    PICKED(5, "PickedUp"), COMPLETE(6, "Complete");
+    RECEIVED(1, "Received"), STOW(2, "Stow"), AVIALABLE(3, "Available"),
+    PICKED(5, "Picked"), COMPLETE(6, "Complete");
 
     private final Integer receiveId;
 

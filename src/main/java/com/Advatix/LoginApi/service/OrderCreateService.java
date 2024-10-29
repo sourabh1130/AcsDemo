@@ -7,6 +7,7 @@ import com.Advatix.LoginApi.entity.Order.OmsOrderItems;
 import com.Advatix.LoginApi.entity.Order.FEPOrderInfo;
 import com.Advatix.LoginApi.entity.Order.FEPOrderItems;
 import com.Advatix.LoginApi.entity.Warehouse.WarehouseRecivedItems;
+import com.Advatix.LoginApi.entity.Warehouse.enums.MasterStatus;
 import com.Advatix.LoginApi.service.ClientService.CILService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class OrderCreateService {
                 if(wareHouseItems.isPresent()){
                     if(wareHouseItems.get().getQuantity()>=e.getProductQty()){
                         wareHouseItems.get().setQuantity(wareHouseItems.get().getQuantity()-e.getProductQty());
-                        omsOrderInfo.setStatus(1);
+                        omsOrderInfo.setStatus(MasterStatus.Created);
                         cilService.addOrderCIL(omsOrderInfo);
                         warehouseRepo.save(wareHouseItems.get());   //save
                         FEPOrderInfo fepOrderInfo=new FEPOrderInfo();
@@ -53,7 +54,7 @@ public class OrderCreateService {
                         long qn=wareHouseItems.get().getQuantity()-e.getProductQty();
                         if(qn<0){
                             wareHouseItems.get().setQuantity(0L);
-                            omsOrderInfo.setStatus(18);
+                            omsOrderInfo.setStatus(MasterStatus.BackOrder);
                             e.setProductQty(qn*-1);
                             omsOrderInfo.setReason("backorder");
                             cilService.addOrderCIL(omsOrderInfo);
