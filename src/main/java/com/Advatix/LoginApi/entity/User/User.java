@@ -14,15 +14,15 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uid;
+    private Long uid;//Integer
     private String uName;
     private Long roleId;
     private String mail;
     private Integer pNo;
-    private Boolean status;
+    private Boolean status;//integer
     private String password;
-    private Long clientId;
-    private Long cityID;
+    private Long clientId;//
+    private Long cityID;//
 
 
 

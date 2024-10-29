@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long clientId;
+    private Long clientId;//integer
     private String clientName;
     private Long clientPhno;
     private String clientMail;

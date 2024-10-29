@@ -2,6 +2,8 @@ package com.Advatix.LoginApi.entity.Warehouse;
 
 import com.Advatix.LoginApi.dto.BoxDimensionsDto;
 import com.Advatix.LoginApi.entity.Warehouse.enums.BoxType;
+import com.Advatix.LoginApi.entity.Warehouse.enums.MasterStatus;
+import com.Advatix.LoginApi.entity.Warehouse.enums.PickerStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +21,7 @@ public class Box {
 
     @Enumerated(EnumType.STRING)
     private BoxType type;
-    private String status;
+    private MasterStatus status;
     private Long boxId;
     private Long orderNumber;
     private Double weight;

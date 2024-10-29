@@ -1,5 +1,6 @@
 package com.Advatix.LoginApi.entity.Product;
 
+import com.Advatix.LoginApi.entity.Warehouse.enums.InventoryStage;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long pId;
     private Long clientId;
-    private Boolean pStatus;
+    private InventoryStage pStatus;
     @Column(unique=true)
     private String sku;
     @Column(unique=true)

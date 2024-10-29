@@ -4,5 +4,5 @@ import lombok.Getter;
 
 @Getter
 public enum PickerStatus {
-    ASSIGNED, UNASSIGNED,PACKED;
+    ASSIGNED, UNASSIGNED,PICKED,PACKED;
 }

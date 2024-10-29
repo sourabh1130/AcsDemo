@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class LpnRequestDto {
     private String lpn;
-    private String order;
+    private String orderName;
+    private Long orderId;
     private Long orderStatus;
 }

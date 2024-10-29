@@ -20,20 +20,23 @@ public class TruckLoadSerivce {
             return "Order not ready to ship";
 
         }
-        if(lpnOrderMappingRepo.existsById(lpnRequestDto.getOrder())){
+        if(lpnOrderMappingRepo.existsByOrderName(lpnRequestDto.getOrderName())){
             return "order is already assigned to another Lpn";
         }
         LpnEntity lpnEntity= lpnRepository.findByLpn(lpnRequestDto.getLpn());
         if(lpnEntity==null){
             return "order not found";
+        } else if (lpnRequestDto.getOrderStatus()==6) {
+            LpnOrderMappingEntity mapping=new LpnOrderMappingEntity();
+            mapping.setLpn(lpnRequestDto.getLpn());
+            mapping.setOrderName(lpnRequestDto.getOrderName());
+
+            lpnOrderMappingRepo.save(mapping);
+
+            return "order successfully assigned to Lpn  :";
         }
-        LpnOrderMappingEntity mapping=new LpnOrderMappingEntity();
-        mapping.setLpn(lpnRequestDto.getLpn());
-        mapping.setOrder(lpnRequestDto.getOrder());
+        return lpnRequestDto.getLpn();
 
-        lpnOrderMappingRepo.save(mapping);
-
-        return "order successfully assigned to Lpn  :"+lpnRequestDto.getLpn();
     }
 
 }

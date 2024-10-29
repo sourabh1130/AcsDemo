@@ -1,5 +1,7 @@
 package com.Advatix.LoginApi.entity.Order;
 
+import com.Advatix.LoginApi.entity.Warehouse.enums.MasterStatus;
+import com.Advatix.LoginApi.entity.Warehouse.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,7 +19,7 @@ public class OmsOrderInfo {
     private Long orderId;
     private Long clientId;
     private String reason;
-    private int status;
+    private MasterStatus status;//int
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id_fk", referencedColumnName = "order_id")
     private List<OmsOrderItems> orderItemsList;
@@ -28,10 +30,10 @@ public class OmsOrderInfo {
     private String shipToCity;
     private String shipToCountry;
     private String shipToState;
-//    private String shippedFrom;
+//    private Integer parentOrderID;
     private Boolean shipToIsResidential;
     private Long shipToPostalCode;
-    private String shippedTo;
+//    private String shippedTo;
     private String carrier;
     private String serviceType;
     private Long wId;
