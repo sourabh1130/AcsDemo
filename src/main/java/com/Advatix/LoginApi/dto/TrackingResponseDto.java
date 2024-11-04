@@ -15,6 +15,7 @@ public class TrackingResponseDto {
     private String message;
     private Payload payload;
     private boolean success;
+//    private String pdfFilePath;
 
     @Data
     @AllArgsConstructor
@@ -48,6 +49,8 @@ public class TrackingResponseDto {
         private String description;
         private String location;
         private String category;
+    //    private String imagePath;
+//
 
         @JsonIgnore
         private String occurredAt;
