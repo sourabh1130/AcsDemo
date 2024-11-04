@@ -76,13 +76,31 @@ public class TrackShipment {
                         eventCode, zuluEventTime, customerRefId, localTs, timeZone,
                         description, location, category, null, description, null
                 ));
+
             }
 
-            // Get image URL from pods
-            String imageUrl = trackingInfo.path("pods").get(0).asText();
+//            // Get image URL from pods
+//            String imageUrl = trackingInfo.path("pods").get(0).asText();
+            List<String> imageUrls = new ArrayList<>();
+            String imageUrl = null;
+            for (JsonNode podNode : trackingInfo.path("pods")) {
+                imageUrl = podNode.asText();
+                String savedImagePath = downloadImage(imageUrl, trackingNumber);
+                if (savedImagePath != null) {
+                    imageUrls.add(savedImagePath);
+                }
+            }
+
+// Save all image paths to ThirdPartyStatus
+            ThirdPartyStatus thirdPartyStatus = new ThirdPartyStatus();
+            thirdPartyStatus.setImagePaths(imageUrls); // Update to handle a list of image paths
+
+            ShipmentJourney shipmentJourney = new ShipmentJourney();
+            shipmentJourney.setImagePaths(imageUrls);
+
 
             // Save to ThirdPartyStatus
-            ThirdPartyStatus thirdPartyStatus = new ThirdPartyStatus();
+            thirdPartyStatus = new ThirdPartyStatus();
             thirdPartyStatus.setId(Long.valueOf(requestDto.getTrackingNumbers().hashCode()));
             thirdPartyStatus.setTStatus(trackingInfo.path("events").get(0).path("category").asText());
             thirdPartyStatus.setStatusTime(OffsetDateTime.parse(trackingInfo.path("events").get(0).path("ts").asText()).toLocalDateTime());
@@ -92,7 +110,7 @@ public class TrackShipment {
             thirdPartyStatusRepo.save(thirdPartyStatus);
 
             // Save to ShipmentJourney
-            ShipmentJourney shipmentJourney = new ShipmentJourney();
+            shipmentJourney = new ShipmentJourney();
             shipmentJourney.setId(Long.valueOf(requestDto.getTrackingNumbers().hashCode()));
             shipmentJourney.setStatusTime(OffsetDateTime.parse(trackingInfo.path("events").get(0).path("ts").asText()).toLocalDateTime());
             shipmentJourney.setBarCode(trackingNumber);

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,4 +23,12 @@ public class ThirdPartyStatus {
     private String barCode;
     private String imagePath;
     private String statusDesc;
+    private  List<String> imagePaths;
+
+
+
+
+    public List<String> getImagePaths() {
+        return imagePaths;
+    }
 }
